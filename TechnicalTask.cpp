@@ -11,22 +11,22 @@ int main()
 {
   std::string filename;
 
-  /// Ввод имени файла
+  /// Р’РІРѕРґ РёРјРµРЅРё С„Р°Р№Р»Р°
   std::cout << "Enter the name of input file:\n";
   std::cin >> filename;
 
-  /// Проверка на расширение в имени файла
+  /// РџСЂРѕРІРµСЂРєР° РЅР° СЂР°СЃС€РёСЂРµРЅРёРµ РІ РёРјРµРЅРё С„Р°Р№Р»Р°
   if (!has_suffix(filename, ".txt"))
   {
     filename += ".txt";
   }
 
-  std::string line; /// Строка, считываемая из файла
+  std::string line; /// РЎС‚СЂРѕРєР°, СЃС‡РёС‚С‹РІР°РµРјР°СЏ РёР· С„Р°Р№Р»Р°
   std::ifstream input(filename);
-  std::vector<Point> lineSegment; /// Вектор для хранения узлов линии
-  Point lastPoint; /// Точка для сравнения одинаковых решений
+  std::vector<Point> lineSegment; /// Р’РµРєС‚РѕСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СѓР·Р»РѕРІ Р»РёРЅРёРё
+  Point lastPoint; /// РўРѕС‡РєР° РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ РѕРґРёРЅР°РєРѕРІС‹С… СЂРµС€РµРЅРёР№
 
-  /// Попытка открыть файл для чтения и считывание узлов линии
+  /// РџРѕРїС‹С‚РєР° РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» РґР»СЏ С‡С‚РµРЅРёСЏ Рё СЃС‡РёС‚С‹РІР°РЅРёРµ СѓР·Р»РѕРІ Р»РёРЅРёРё
   if (input.is_open())
   {
     while (std::getline(input, line))
@@ -42,13 +42,13 @@ int main()
     return 0;
   }
 
-  /// Ввод точки для проекции
+  /// Р’РІРѕРґ С‚РѕС‡РєРё РґР»СЏ РїСЂРѕРµРєС†РёРё
   double t_x = 0, t_y = 0, t_z = 0;
   std::cout << "Enter target point: ";
   std::cin >> t_x >> t_y >> t_z;
   Point targetPoint{ t_x, t_y, t_z };
 
-  /// Вывод на экран считанных данных
+  /// Р’С‹РІРѕРґ РЅР° СЌРєСЂР°РЅ СЃС‡РёС‚Р°РЅРЅС‹С… РґР°РЅРЅС‹С…
   std::cout << "Nodes:" << std::endl;
   for (auto i = lineSegment.begin(); i != lineSegment.end(); i++)
   {
@@ -57,13 +57,13 @@ int main()
   std::cout << "Target point:" << std::endl;
   std::cout << "x: " << targetPoint.GetX() << " y: " << targetPoint.GetY() << " z: " << targetPoint.GetZ() << std::endl;
 
-  double distance = 0;                /// Расстояние от точки до отрезка
-  double min = LONG_MAX;              /// Минимальное расстояние
-  int count = 1, answers_count = 0;   /// Счетчики сегментов и ответов
-  std::vector<std::string> result;    /// Вектор ответов
+  double distance = 0;                /// Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё РґРѕ РѕС‚СЂРµР·РєР°
+  double min = LONG_MAX;              /// РњРёРЅРёРјР°Р»СЊРЅРѕРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ
+  int count = 1, answers_count = 0;   /// РЎС‡РµС‚С‡РёРєРё СЃРµРіРјРµРЅС‚РѕРІ Рё РѕС‚РІРµС‚РѕРІ
+  std::vector<std::string> result;    /// Р’РµРєС‚РѕСЂ РѕС‚РІРµС‚РѕРІ
 
-  constexpr double eps = 0.00001;     /// Константа для учета погрешности
-  /// Поиск решений
+  constexpr double eps = 0.00001;     /// РљРѕРЅСЃС‚Р°РЅС‚Р° РґР»СЏ СѓС‡РµС‚Р° РїРѕРіСЂРµС€РЅРѕСЃС‚Рё
+  /// РџРѕРёСЃРє СЂРµС€РµРЅРёР№
   for (auto i = lineSegment.begin(); i != lineSegment.end() - 1; i++)
   {
     LineSegment segment{ *i, *(i + 1) };
@@ -98,7 +98,7 @@ int main()
     ++count;
   }
 
-  /// Вывод ответа в консоль
+  /// Р’С‹РІРѕРґ РѕС‚РІРµС‚Р° РІ РєРѕРЅСЃРѕР»СЊ
   std::cout << "Number of found solutions: " << answers_count << std::endl;
   for (auto i = result.begin(); i != result.end(); i++)
   {
